@@ -4,12 +4,14 @@ module.exports = {
     node: true,
   },
   extends: [
-    'airbnb-base',
+    "airbnb-base",
   ],
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: "module",
   },
   rules: {
+    quotes: ["error", "double"],
+    "linebreak-style": "off",
   },
 };

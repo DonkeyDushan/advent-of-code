@@ -5,6 +5,7 @@
   "repository": "git@github.com:DonkeyDushan/advent-of-code.git",
   "author": "Natálie Sedláková <natsedlakova@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "dependencies": {},
   "devDependencies": {
     "eslint": "^7.23.0",
