@@ -11,7 +11,7 @@ clovek.rekniAhoj = () => "Di doprdele!";
 
 console.log(clovek.rekniAhoj("Michale!"));
 
-//clovek.rekniAhoj = () => console.log("cus");
+// clovek.rekniAhoj = () => console.log("cus");
 
 /*
 const mySum = (add1, add2) => {

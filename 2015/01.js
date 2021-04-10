@@ -1,27 +1,27 @@
 import fs from "fs";
 
-const input = fs.readFileSync("01.txt", "utf-8").trim();
+const input = fs
+  .readFileSync("01.txt", "utf-8")
+  .trim()
+  .split("");
 
-// input = "()(";
+const solveElevator = (instructions) => {
+  let floor = 0;
+  let firstBasement;
 
-const chars = input.split("");
+  instructions.forEach((character, index) => {
+    if (character === "(") floor += 1;
+    if (character === ")") floor -= 1;
+    if (floor <= -1 && !firstBasement) {
+      firstBasement = index + 1;
+    }
+  });
 
-// chars = ["(", ")", "("];
-// chars.indexOf("(");
-// chars.includes(")");
-// chars.forEach((value, index) => {
+  return [floor, firstBasement];
+};
 
-// });
+const [part1, part2] = solveElevator(input);
+// šlo by i jako const result =, ale potom je zmatenější console log:
+// (`Patro je ${result[0]}, druhá část ${result[1]}`)
 
-let floor = 0;
-let firstBasement;
-
-chars.forEach((character, index) => {
-  if (character === "(") floor += 1;
-  if (character === ")") floor -= 1;
-  if (floor <= -1 && !firstBasement) {
-    firstBasement = index + 1;
-  }
-});
-
-console.log(`Patro je ${floor}, druhá část ${firstBasement}`);
+console.log(`Patro je ${part1}, druhá část ${part2}`);
