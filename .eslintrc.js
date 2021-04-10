@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     quotes: ["error", "double"],
+    "no-console": "off",
     "linebreak-style": "off",
   },
 };

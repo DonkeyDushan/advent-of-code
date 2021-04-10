@@ -1,80 +1,45 @@
 import fs from "fs";
 
-const input = fs.readFileSync("01.txt", "utf-8").trim();
-const instructions = input.split(", ");
-let nahorudolu = 0;
-let dostran = 0;
-let uhel = 0;
-let opakovana = "";
-const body = [];
+const input = fs
+  .readFileSync("01.txt", "utf-8")
+  .trim()
+  .split(", ");
 
-instructions.forEach((instruction) => {
-  const kudy = String(instruction.slice(0, 1));
-  const kam = Number(instruction.slice(1));
+const findPath = (instructions) => {
+  let y = 0;
+  let x = 0;
+  let angle = 0;
+  let visited;
+  const steps = [];
 
-  if (kudy === "R") uhel += 90;
-  else uhel -= 90;
-  uhel %= 360;
-  // uhel = (kudy === "R" ? uhel + 90 : uhel - 90) % 360;
+  instructions.forEach((instruction) => {
+    const direction = String(instruction.slice(0, 1));
+    const distance = Number(instruction.slice(1));
 
-  if (uhel === 0) {
-    for (let i = 0; i < kam; i++) {
-      if (body.some((coord) => coord[0] === nahorudolu && coord[1] === dostran)
-        && !opakovana) {
-        opakovana = [nahorudolu, dostran];
+    if (direction === "R") angle += 90;
+    else angle -= 90;
+    angle %= 360;
+    // uhel = (kudy === "R" ? uhel + 90 : uhel - 90) % 360;
+
+    Array(distance).fill(0).forEach(() => {
+      if (steps.some((coord) => coord[0] === y && coord[1] === x)
+        && !visited) {
+        visited = [y, x];
       }
-      body.push([nahorudolu, dostran]);
-      nahorudolu += 1;
-    }
-  } else if (Math.abs(uhel) === 180) {
-    for (let i = 0; i < kam; i++) {
-      if (body.some((coord) => coord[0] === nahorudolu && coord[1] === dostran)
-        && !opakovana) {
-        opakovana = [nahorudolu, dostran];
-      }
-      body.push([nahorudolu, dostran]);
-      nahorudolu -= 1;
-    }
-  } else if (uhel === 90 || uhel === -270) {
-    for (let i = 0; i < kam; i++) {
-      if (body.some((coord) => coord[0] === nahorudolu && coord[1] === dostran)
-        && !opakovana) {
-        opakovana = [nahorudolu, dostran];
-      }
-      body.push([nahorudolu, dostran]);
-      dostran += 1;
-    }
-  } else if (uhel === 270 || uhel === -90) {
-    for (let i = 0; i < kam; i++) {
-      if (body.some((coord) => coord[0] === nahorudolu && coord[1] === dostran)
-        && !opakovana) {
-        opakovana = [nahorudolu, dostran];
-      }
-      body.push([nahorudolu, dostran]);
-      dostran -= 1;
-    }
-  }
+      steps.push([y, x]);
 
+      if (angle === 0) y += 1;
+      else if (Math.abs(angle) === 180) y -= 1;
+      else if (angle === 90 || angle === -270) x += 1;
+      else if (angle === 270 || angle === -90) x -= 1;
+    });
+  });
 
-  /*
-    if (souradnice.some((coord) => coord[0] === nahorudolu && coord[1] === dostran)) {
-      console.log(nahorudolu, dostran);
-    }
-  
-    if (souradnice.some((coord) => coord[0] === nahorudolu && coord[1] === dostran)
-      && !opakovana) {
-      opakovana = [nahorudolu, dostran];
-    }
-    souradnice.push([nahorudolu, dostran]);
-  */
+  const finalPoint = Math.abs(y) + Math.abs(x);
+  const firstVisitedPoint = Math.abs(visited[0]) + Math.abs(visited[1]);
+  return [finalPoint, firstVisitedPoint];
+};
 
-
-  // console.log(kudy, kam, uhel, nahorudolu, dostran);
-});
-// console.log(uhel);
-// console.log(nahorudolu);
-
-//console.log(JSON.stringify(souradnice), JSON.stringify(souradnice.map((el) => Math.abs(el[0]) + Math.abs(el[1]))));
-const cesta = Math.abs(nahorudolu) + Math.abs(dostran);
-const vzdalenostOpakovana = Math.abs(opakovana[0]) + Math.abs(opakovana[1]);
-console.log(cesta, vzdalenostOpakovana);
+const [part1, part2] = findPath(input);
+console.log(`Konec cesty je vzdálen ${part1} metrů od startu, 
+první dvakrát navštívená souřadnice je ${part2} metrů daleko od startu.`);
