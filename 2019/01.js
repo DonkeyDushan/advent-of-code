@@ -14,10 +14,9 @@ const solveFuel = (instructions) => {
   });
 
   totalFuel.forEach((element) => {
-    let fuelForFuel = element;
-    while (fuelForFuel > 0) {
-      fuelForFuel = (((fuelForFuel - (fuelForFuel % 3)) / 3) - 2);
-      if (fuelForFuel > 0) totalFuelForFuel.push(fuelForFuel);
+    while (element > 0) {
+      element = (((element - (element % 3)) / 3) - 2);
+      if (element > 0) totalFuelForFuel.push(element);
     }
   });
 
