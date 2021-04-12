@@ -13,7 +13,7 @@ const findPath = (instructions) => {
   const steps = [];
 
   instructions.forEach((instruction) => {
-    const direction = String(instruction.slice(0, 1));
+    const direction = String(instruction[0]);
     const distance = Number(instruction.slice(1));
 
     if (direction === "R") angle += 90;
