@@ -1,27 +1,25 @@
 import fs from "fs";
 
+const sum = (numbers) => numbers.reduce((previous, current) => previous + current, 0);
+
 const input = fs.readFileSync("01.txt", "utf-8")
   .trim()
   .split("\r\n");
 
 const solveFuel = (instructions) => {
-  const totalFuel = [];
   const totalFuelForFuel = [];
 
-  instructions.forEach((element) => {
-    const fuel = (((element - (element % 3)) / 3) - 2);
-    totalFuel.push(fuel);
-  });
+  const part1 = instructions
+    .reduce((previous, current) => previous + (Math.floor(current / 3)) - 2, 0);
 
-  totalFuel.forEach((element) => {
+  instructions.forEach((element) => {
     while (element > 0) {
-      element = (((element - (element % 3)) / 3) - 2);
+      element = (Math.floor(element / 3)) - 2;
       if (element > 0) totalFuelForFuel.push(element);
     }
   });
 
-  const sum = (numbers) => numbers.reduce((previous, current) => previous + current, 0);
-  return [sum(totalFuel), (sum(totalFuel) + sum(totalFuelForFuel))];
+  return [part1, sum(totalFuelForFuel)];
 };
 
 const result = solveFuel(input);
