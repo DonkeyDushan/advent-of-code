@@ -12,7 +12,11 @@ const solveExpenses = (instructions) => {
   const correctTwoPair = bigCombination(instructions, 2)
     .find((twoPair) => twoPair[0] + twoPair[1] === 2020);
 
-  return (correctTwoPair[0] * correctTwoPair[1]);
+  const correctTriplet = bigCombination(instructions, 3)
+    .find((triplet) => triplet[0] + triplet[1] + triplet[2] === 2020);
+
+  return [correctTwoPair[0] * correctTwoPair[1],
+    correctTriplet[0] * correctTriplet[1] * correctTriplet[2]];
 };
 
 const result = solveExpenses(input);
