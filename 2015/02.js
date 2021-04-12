@@ -24,7 +24,7 @@ const solvePaper = (instructions) => {
     totalPaper += sum(box);
   });
 
-  return(totalPaper);
+  return totalPaper;
 };
 
 const result = solvePaper(input);
