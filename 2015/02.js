@@ -10,13 +10,13 @@ const input = fs.readFileSync("02.txt", "utf-8")
   .map((splitX) => splitX.split("x").map(Number));
 
 const solvePaper = (instructions) => {
-  const paperArrays = instructions.map((element) => bigCombination(element, 2)
-    .map((area) => area[0] * area[1] * 2))
-    .map((box) => [...box, Math.min(...box) / 2]);
+  const boxes = instructions.map((rawBox) => {
+    const sideCombinations = bigCombination(rawBox, 2);
+    const boxArea = sideCombinations.map((area) => area[0] * area[1] * 2);
+    return sum([...boxArea, Math.min(...boxArea) / 2]);
+  });
 
-  const totalPaper = paperArrays.map((box) => sum(box));
-
-  return sum(totalPaper);
+  return sum(boxes);
 };
 
 const result = solvePaper(input);
