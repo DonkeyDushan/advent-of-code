@@ -14,5 +14,6 @@ module.exports = {
     quotes: ["error", "double"],
     "no-console": "off",
     "linebreak-style": "off",
+    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
   },
 };
