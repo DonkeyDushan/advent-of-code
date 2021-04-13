@@ -15,9 +15,14 @@ const solvePaper = (instructions) => {
     const boxArea = sideCombinations.map((area) => area[0] * area[1] * 2);
     return sum([...boxArea, Math.min(...boxArea) / 2]);
   });
-
   return sum(boxes);
 };
 
-const result = solvePaper(input);
-console.log(result);
+const solveRibbon = (instructions) => {
+  const bow = instructions.map(([l, w, h]) => l * w * h);
+  const ribbons = instructions.map((oneBox) => sum(oneBox.sort((a, b) => a - b).slice(0, 2)) * 2);
+  return sum(ribbons) + sum(bow);
+};
+
+const [paper, ribbon] = [solvePaper(input), solveRibbon(input)];
+console.log(paper, ribbon);

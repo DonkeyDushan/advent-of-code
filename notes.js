@@ -1,5 +1,5 @@
 // dokumentace js-combinatorics: https://github.com/dankogai/js-combinatorics/tree/0c54be9bc197478628e2ddac3314532e93c3af39
-import { bigCombination } from 'js-combinatorics';
+import combinatorics from 'js-combinatorics';
 
 // objekt: properties + "metoda"
 const clovek = {
@@ -44,3 +44,10 @@ const newChars = [...chars];
 Math.round(3.5); // 4, klasicky
 Math.floor(3.9); // 3, dolů
 Math.ceil(3.1); // 4, nahoru
+
+// destructuring
+const destrArr = [[1, 2, 3], [4, 5, 6]];
+console.log(destrArr.map(([a, b, c]) => a * c));
+
+const destrObj = [{ length: 2, width: 3, height: 4 }, { length: 5, width: 6, height: 7 }];
+console.log(destrObj.map(({ length, height }) => length * height));
