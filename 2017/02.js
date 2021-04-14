@@ -31,12 +31,12 @@ const solvePuzzle1 = (instructions) => {
 
 const solvePuzzle2 = (instructions) => {
   const arr = [];
-  instructions.map((element) => {
+  instructions.forEach((element) => {
     const combinedPairs = bigCombination(element, 2);
 
-    combinedPairs.forEach((element) => {
-      if (Math.max(...element) % Math.min(...element) === 0) {
-        const x = Math.max(...element) / Math.min(...element);
+    combinedPairs.forEach((pair) => {
+      if (Math.max(...pair) % Math.min(...pair) === 0) {
+        const x = Math.max(...pair) / Math.min(...pair);
         arr.push(x);
       }
     });
