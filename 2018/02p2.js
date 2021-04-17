@@ -6,6 +6,8 @@ const input = fs
   .split("\r\n");
 
 const findSimilar = (instructions) => {
+  let result;
+
   for (let i = 0; i < instructions.length; i++) {
     const chosenString = instructions[i].split("");
     // console.log(chosenString);
@@ -32,10 +34,12 @@ const findSimilar = (instructions) => {
         }
       }
       if (similar.length === (chosenString.length - 1)) {
-        return [similar.join(""), differentChar];
+        result = [similar.join(""), differentChar];
+        break;
       }
     }
   }
+  return result;
 };
 
 const result = findSimilar(input);
