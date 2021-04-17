@@ -3,17 +3,16 @@ import fs from "fs";
 const input = fs
   .readFileSync("02.txt", "utf-8")
   .trim()
-  .split("\r\n")
-  .map((element) => element.split("").join(""));
+  .split("\r\n");
 
 const findSimilar = (instructions) => {
-  let similar = [];
-  let differentChar;
   for (let i = 0; i < instructions.length; i++) {
     const chosenString = instructions[i].split("");
     // console.log(chosenString);
 
     for (let j = i + 1; j < instructions.length; j++) {
+      const similar = [];
+      let differentChar;
       let strikes = 0;
       const comparedString = instructions[j].split("");
       // console.log("vs.", comparedString);
@@ -25,15 +24,13 @@ const findSimilar = (instructions) => {
         }
         // console.log(similar);
         if (chosenString[k] !== comparedString[k] && strikes <= 1) {
-          differentChar = chosenString[k];
+          differentChar = [k, chosenString[k], comparedString[k]];
           strikes += 1;
         }
         if (chosenString[k] !== comparedString[k] && strikes > 1) {
-          similar = [];
           break;
         }
       }
-
       if (similar.length === (chosenString.length - 1)) {
         return [similar.join(""), differentChar];
       }
