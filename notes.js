@@ -51,3 +51,19 @@ console.log(destrArr.map(([a, b, c]) => a * c));
 
 const destrObj = [{ length: 2, width: 3, height: 4 }, { length: 5, width: 6, height: 7 }];
 console.log(destrObj.map(({ length, height }) => length * height));
+
+const makeDiv = ({
+  size = 10,
+  style = "cursive",
+  color = "black",
+}) => {
+  console.log(size, style, color);
+};
+
+makeDiv({ size: 12, color: "red" });
+
+const add = (num1, num2) => { };
+
+const addObj = ({ num1, num2 }) => num1 + num2;
+
+addObj({ num1: 6, num2: 8 });

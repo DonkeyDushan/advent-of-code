@@ -10,26 +10,20 @@ const findSimilar = (instructions) => {
 
   for (let i = 0; i < instructions.length; i++) {
     const chosenString = instructions[i].split("");
-    // console.log(chosenString);
 
     for (let j = i + 1; j < instructions.length; j++) {
       const similar = [];
-      let differentChar;
-      let strikes = 0;
+      let differentChar = [0, "", ""];
+      let firstStrike = false;
       const comparedString = instructions[j].split("");
-      // console.log("vs.", comparedString);
 
       for (let k = 0; k < instructions[i].length; k++) {
-        // console.log(chosenString[k], comparedString[k]);
-        if (chosenString[k] === comparedString[k] && strikes <= 1) {
+        if (chosenString[k] === comparedString[k]) {
           similar.push(chosenString[k]);
-        }
-        // console.log(similar);
-        if (chosenString[k] !== comparedString[k] && strikes <= 1) {
+        } else if (!firstStrike) {
           differentChar = [k, chosenString[k], comparedString[k]];
-          strikes += 1;
-        }
-        if (chosenString[k] !== comparedString[k] && strikes > 1) {
+          firstStrike = true;
+        } else {
           break;
         }
       }
