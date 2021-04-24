@@ -1,6 +1,5 @@
-import { sign } from "crypto";
 import fs from "fs";
-import combinatorics from 'js-combinatorics';
+import combinatorics from "js-combinatorics";
 
 const { bigCombination } = combinatorics;
 
@@ -12,36 +11,22 @@ const input = fs
   .split("\r\n")
   .map((element) => element.split("\t").map(Number));
 
-// console.log(input);
-
 const solvePuzzle1 = (instructions) => {
   const differences = instructions.map((element) => {
-    const min = Math.min(...element);
     const max = Math.max(...element);
-    return Math.abs(max - min);
-    /*
-    const min = element.map((num) => Math.min(...element));
-    const max = element.map((num) => Math.max(...element));
-    sum += Math.abs(max - min);
-    console.log(min);
-    */
+    const min = Math.min(...element);
+    return max - min;
   });
   return sum(differences);
 };
 
 const solvePuzzle2 = (instructions) => {
-  const arr = [];
-  instructions.forEach((element) => {
-    const combinedPairs = bigCombination(element, 2);
-
-    combinedPairs.forEach((pair) => {
-      if (Math.max(...pair) % Math.min(...pair) === 0) {
-        const x = Math.max(...pair) / Math.min(...pair);
-        arr.push(x);
-      }
-    });
+  const divisions = instructions.map((row) => {
+    const correctPair = bigCombination(row, 2)
+      .find((pair) => Math.max(...pair) % Math.min(...pair) === 0);
+    return Math.max(...correctPair) / Math.min(...correctPair);
   });
-  return sum(arr);
+  return sum(divisions);
 };
 
 console.log(solvePuzzle1(input), solvePuzzle2(input));
